@@ -175,16 +175,6 @@ func (client *TDClient) CreateTable(db string, table string, type_ string, param
 	return nil
 }
 
-func (client *TDClient) CreateItemTable(db string, table string, primaryKey string, primaryKeyType string) error {
-	return client.CreateTable(
-		db, table, "item",
-		map[string]string{
-			"primary_key":      primaryKey,
-			"primary_key_type": primaryKeyType,
-		},
-	)
-}
-
 func (client *TDClient) CreateLogTable(db string, table string) error {
 	return client.CreateTable(db, table, "log", nil)
 }
