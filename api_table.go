@@ -163,7 +163,7 @@ func (client *TDClient) ListTables(db string) (*ListTablesResult, error) {
 	return &retval, nil
 }
 
-func (client *TDClient) createTable(db string, table string, type_ string, params map[string]string) error {
+func (client *TDClient) CreateTable(db string, table string, type_ string, params map[string]string) error {
 	resp, err := client.post(fmt.Sprintf("/v3/table/create/%s/%s/%s", url.QueryEscape(db), url.QueryEscape(table), url.QueryEscape(type_)), dictToValues(params))
 	if err != nil {
 		return err
@@ -176,7 +176,7 @@ func (client *TDClient) createTable(db string, table string, type_ string, param
 }
 
 func (client *TDClient) CreateItemTable(db string, table string, primaryKey string, primaryKeyType string) error {
-	return client.createTable(
+	return client.CreateTable(
 		db, table, "item",
 		map[string]string{
 			"primary_key":      primaryKey,
@@ -186,7 +186,7 @@ func (client *TDClient) CreateItemTable(db string, table string, primaryKey stri
 }
 
 func (client *TDClient) CreateLogTable(db string, table string) error {
-	return client.createTable(db, table, "log", nil)
+	return client.CreateTable(db, table, "log", nil)
 }
 
 func (client *TDClient) SwapTable(db string, table1 string, table2 string) error {
